@@ -1,0 +1,509 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-03-22"
+---
+
+```{r }
+
+shapiro_test_result <- shapiro.test(Batch_1_WK$total_cell_points)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_WK$total_cell_points)
+qqline(Batch_1_WK$total_cell_points, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_WK$total_cell_points, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_WK$total_cell_points), col = "blue", lwd = 2)
+
+```
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_WK$iTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_WK$iTIL)
+qqline(Batch_1_WK$iTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_WK$iTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_WK$iTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_WK$sTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_WK$sTIL)
+qqline(Batch_1_WK$sTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_WK$sTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_WK$sTIL), col = "blue", lwd = 2)
+
+```
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_TB$total_cell_points)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_TB$total_cell_points)
+qqline(Batch_1_TB$total_cell_points, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_TB$total_cell_points, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_TB$total_cell_points), col = "blue", lwd = 2)
+
+```
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_TB$iTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_TB$iTIL)
+qqline(Batch_1_TB$iTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_TB$iTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_TB$iTIL), col = "blue", lwd = 2)
+
+```
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_TB$sTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_TB$sTIL)
+qqline(Batch_1_TB$sTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_TB$sTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_TB$sTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_SH$total_cell_points)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_SH$total_cell_points)
+qqline(Batch_1_SH$total_cell_points, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_SH$total_cell_points, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_SH$total_cell_points), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_SH$iTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_SH$iTIL)
+qqline(Batch_1_SH$iTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_SH$iTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_SH$iTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_1_TB$sTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_1_SH$sTIL)
+qqline(Batch_1_SH$sTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_1_SH$sTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_1_SH$sTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_WK$total_cell_points)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_WK$total_cell_points)
+qqline(Batch_2_WK$total_cell_points, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_WK$total_cell_points, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_WK$total_cell_points), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_WK$iTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_WK$iTIL)
+qqline(Batch_2_WK$iTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_WK$iTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_WK$iTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_WK$sTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_WK$sTIL)
+qqline(Batch_2_WK$sTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_WK$sTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_WK$sTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_TB$total_cell_points)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_TB$total_cell_points)
+qqline(Batch_2_TB$total_cell_points, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_TB$total_cell_points, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_TB$total_cell_points), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_TB$iTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_TB$iTIL)
+qqline(Batch_2_TB$iTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_TB$iTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_TB$iTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_TB$sTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_TB$sTIL)
+qqline(Batch_2_TB$sTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_TB$sTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_TB$sTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_SH$total_cell_points)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_SH$total_cell_points)
+qqline(Batch_2_SH$total_cell_points, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_SH$total_cell_points, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_SH$total_cell_points), col = "blue", lwd = 2)
+
+```
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_SH$iTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_SH$iTIL)
+qqline(Batch_2_SH$iTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_SH$iTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_SH$iTIL), col = "blue", lwd = 2)
+
+```
+
+
+```{r}
+
+shapiro_test_result <- shapiro.test(Batch_2_SH$sTIL)
+print(shapiro_test_result)
+
+# QQ plot for visual inspection
+qqnorm(Batch_2_SH$sTIL)
+qqline(Batch_2_SH$sTIL, col = "steelblue", lwd = 2)
+
+# You can also use additional functions for visual tests, such as the histogram and the density plot
+hist(Batch_2_SH$sTIL, main = "Histogram of Data", xlab = "Data Values", col = "lightblue", border = "black")
+# Adding a density plot over the histogram
+lines(density(Batch_2_SH$sTIL), col = "blue", lwd = 2)
+
+```
+
+
+
+```{r cars}
+
+read_excel_sheets <- function(file_path) {
+  # Get the names of all sheets in the Excel file
+  sheet_names <- excel_sheets(file_path)
+  dataframes <- list()
+  
+  # Read each sheet into a data frame and store in a list
+  for (sheet_name in sheet_names) {
+    dataframes[[sheet_name]] <- read_excel(file_path, sheet = sheet_name)
+  }
+  
+  return(dataframes)
+}
+
+# Example usage:
+excel_file_path <- "C:/Users/shimm/OneDrive/Desktop/Batch_1.xlsx"  # Replace with the path to your Excel file
+dfs <- read_excel_sheets(excel_file_path)
+
+```
+
+
+
+```{r}
+
+icc_results_1_tcp <- icc(Batch_1_total_cell_points)
+
+# Print the results
+print(icc_results_1_tcp)
+
+icc_values <- unlist(lapply(icc_results_1_tcp, function(x) x$icc))
+pathologist_names <- names(icc_results_1_tcp)
+
+# Create a data frame with pathologist names and ICC values
+icc_df <- data.frame(Pathologist = rep(pathologist_names, each = length(icc_results_1_tcp[[1]])),
+                     Rating = icc_values)
+
+ratings_long <- melt(icc_results_1_tcp , variable.name = 'Pathologist', value.name = 'Rating')
+
+# Now let's create a plot with ggplot2
+ggplot(ratings_long, aes(x = variable, y = Rating, group = Pathologist, color = Pathologist)) +
+  geom_point(position = position_dodge(width = 0.2)) + # Dodge position for better visibility
+  geom_line(position = position_dodge(width = 0.2)) + # Connecting lines to show trends for each pathologist
+  theme_minimal() +
+  labs(x = 'Slide', y = 'Rating', title = 'Pathologists\' Ratings per Slide') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Adjust text angle for readability if needed
+
+
+```
+
+```{r}
+
+icc_results_1_iTIL <- icc(Batch_1_iTIL)
+
+# Print the results
+print(icc_results_1_iTIL)
+
+ratings_long <- melt(icc_results_1_iTIL , variable.name = 'Pathologist', value.name = 'Rating')
+
+# Now let's create a plot with ggplot2
+ggplot(ratings_long, aes(x = variable, y = Rating, group = Pathologist, color = Pathologist)) +
+  geom_point(position = position_dodge(width = 0.2)) + # Dodge position for better visibility
+  geom_line(position = position_dodge(width = 0.2)) + # Connecting lines to show trends for each pathologist
+  theme_minimal() +
+  labs(x = 'Slide', y = 'Rating', title = 'Pathologists\' Ratings per Slide') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Adjust text angle for readability if needed
+
+```
+
+
+```{r}
+
+icc_results_1_sTIL <- icc(Batch_1_sTIL)
+
+# Print the results
+print(icc_results_1_sTIL)
+
+ratings_long <- melt(icc_results_1_sTIL , variable.name = 'Pathologist', value.name = 'Rating')
+
+# Now let's create a plot with ggplot2
+ggplot(ratings_long, aes(x = variable, y = Rating, group = Pathologist, color = Pathologist)) +
+  geom_point(position = position_dodge(width = 0.2)) + # Dodge position for better visibility
+  geom_line(position = position_dodge(width = 0.2)) + # Connecting lines to show trends for each pathologist
+  theme_minimal() +
+  labs(x = 'Slide', y = 'Rating', title = 'Pathologists\' Ratings per Slide') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Adjust text angle for readability if needed
+
+
+```
+
+
+```{r}
+
+icc_results_2_tcp <- icc(Batch_2_total_cell_points)
+
+# Print the results
+print(icc_results_2_tcp)
+
+ratings_long <- melt(icc_results_2_tcp , variable.name = 'Pathologist', value.name = 'Rating')
+
+# Now let's create a plot with ggplot2
+ggplot(ratings_long, aes(x = variable, y = Rating, group = Pathologist, color = Pathologist)) +
+  geom_point(position = position_dodge(width = 0.2)) + # Dodge position for better visibility
+  geom_line(position = position_dodge(width = 0.2)) + # Connecting lines to show trends for each pathologist
+  theme_minimal() +
+  labs(x = 'Slide', y = 'Rating', title = 'Pathologists\' Ratings per Slide') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Adjust text angle for readability if needed
+
+
+```
+
+
+```{r}
+
+icc_results_2_iTIL <- icc(Batch_2_iTIL)
+
+# Print the results
+print(icc_results_2_iTIL)
+
+ratings_long <- melt(icc_results_2_iTIL , variable.name = 'Pathologist', value.name = 'Rating')
+
+# Now let's create a plot with ggplot2
+ggplot(ratings_long, aes(x = variable, y = Rating, group = Pathologist, color = Pathologist)) +
+  geom_point(position = position_dodge(width = 0.2)) + # Dodge position for better visibility
+  geom_line(position = position_dodge(width = 0.2)) + # Connecting lines to show trends for each pathologist
+  theme_minimal() +
+  labs(x = 'Slide', y = 'Rating', title = 'Pathologists\' Ratings per Slide') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Adjust text angle for readability if needed
+
+
+```
+
+
+```{r}
+
+icc_results_2_sTIL <- icc(Batch_2_sTIL)
+
+# Print the results
+print(icc_results_2_sTIL)
+
+ratings_long <- melt(icc_results_2_sTIL , variable.name = 'Pathologist', value.name = 'Rating')
+
+# Now let's create a plot with ggplot2
+ggplot(ratings_long, aes(x = variable, y = Rating, group = Pathologist, color = Pathologist)) +
+  geom_point(position = position_dodge(width = 0.2)) + # Dodge position for better visibility
+  geom_line(position = position_dodge(width = 0.2)) + # Connecting lines to show trends for each pathologist
+  theme_minimal() +
+  labs(x = 'Slide', y = 'Rating', title = 'Pathologists\' Ratings per Slide') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Adjust text angle for readability if needed
+
+```
+
+
+```{r}
+
+bland.altman.plot(Batch_1_total_cell_points$WK, Batch_1_total_cell_points$TB, main="Batch 1 - Total Cell Points - WK vs TB", xlab="Average of WK and TB", ylab="Difference between WK and TB")
+bland.altman.plot(Batch_1_total_cell_points$WK, Batch_1_total_cell_points$SH, main="Batch 1 - Total Cell Points - WK vs SH", xlab="Average of WK and SH", ylab="Difference between WK and SH")
+bland.altman.plot(Batch_1_total_cell_points$TB, Batch_1_total_cell_points$SH, main="Batch 1 - Total Cell Points - TB vs SH", xlab="Average of TB and SH", ylab="Difference between TB and SH")
+
+bland.altman.plot(Batch_1_iTIL$WK, Batch_1_iTIL$TB, main="Batch 1 - iTIL - WK vs TB", xlab="Average of WK and TB", ylab="Difference between WK and TB")
+bland.altman.plot(Batch_1_iTIL$WK, Batch_1_iTIL$SH, main="Batch 1 - iTIL - WK vs SH", xlab="Average of WK and SH", ylab="Difference between WK and SH")
+bland.altman.plot(Batch_1_iTIL$TB, Batch_1_iTIL$SH, main="Batch 1 - iTIL - TB vs SH", xlab="Average of TB and SH", ylab="Difference between TB and SH")
+
+bland.altman.plot(Batch_1_sTIL$WK, Batch_1_sTIL$TB, main="Batch 1 - sTIL - WK vs TB", xlab="Average of WK and TB", ylab="Difference between WK and TB")
+bland.altman.plot(Batch_1_sTIL$WK, Batch_1_sTIL$SH, main="Batch 1 - sTIL - WK vs SH", xlab="Average of WK and SH", ylab="Difference between WK and SH")
+bland.altman.plot(Batch_1_sTIL$TB, Batch_1_sTIL$SH, main="Batch 1 - sTIL - TB vs SH", xlab="Average of TB and SH", ylab="Difference between TB and SH")
+
+bland.altman.plot(Batch_2_total_cell_points$WK, Batch_2_total_cell_points$TB, main="Batch 2 - Total Cell Points - WK vs TB", xlab="Average of WK and TB", ylab="Difference between WK and TB")
+bland.altman.plot(Batch_2_total_cell_points$WK, Batch_2_total_cell_points$SH, main="Batch 2 - Total Cell Points - WK vs SH", xlab="Average of WK and SH", ylab="Difference between WK and SH")
+bland.altman.plot(Batch_2_total_cell_points$TB, Batch_2_total_cell_points$SH, main="Batch 2 - Total Cell Points - TB vs SH", xlab="Average of TB and SH", ylab="Difference between TB and SH")
+
+bland.altman.plot(Batch_2_iTIL$WK, Batch_2_iTIL$TB, main="Batch 2 - iTIL - WK vs TB", xlab="Average of WK and TB", ylab="Difference between WK and TB")
+bland.altman.plot(Batch_2_iTIL$WK, Batch_2_iTIL$SH, main="Batch 2 - iTIL - WK vs SH", xlab="Average of WK and SH", ylab="Difference between WK and SH")
+bland.altman.plot(Batch_2_iTIL$TB, Batch_2_iTIL$SH, main="Batch 2 - iTIL - TB vs SH", xlab="Average of TB and SH", ylab="Difference between TB and SH")
+
+bland.altman.plot(Batch_2_sTIL$WK, Batch_2_sTIL$TB, main="Batch 2 - sTIL - WK vs TB", xlab="Average of WK and TB", ylab="Difference between WK and TB")
+bland.altman.plot(Batch_2_sTIL$WK, Batch_2_sTIL$SH, main="Batch 2 - sTIL - WK vs SH", xlab="Average of WK and SH", ylab="Difference between WK and SH")
+bland.altman.plot(Batch_2_sTIL$TB, Batch_2_sTIL$SH, main="Batch 2 - sTIL - TB vs SH", xlab="Average of TB and SH", ylab="Difference between TB and SH")
+
+
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
