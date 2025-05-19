@@ -51,6 +51,6 @@ process_images <- function(input_folder, output_file) {
 }
 
 # Example usage
-input_folder <- "C:/Users/shimm/Downloads/새 폴더/╗⌡ ╞·┤⌡/Artifact_0.8.0/Artifact_0.8.0"  # Update the path if needed
-output_file <- "0.8.0.csv"
+input_folder <- "file path"  # Update the path if needed
+output_file <- "output file name"
 process_images(input_folder, output_file)
