@@ -1,0 +1,347 @@
+---
+title: "Bootstrapping Code"
+output: html_document
+date: "2024-04-05"
+---
+
+
+```{r}
+
+# Mean Raw Difference Code
+
+# Assuming 'data' is your dataframe loaded from an Excel file
+data <- read_excel("input file")
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Identify numeric columns (assuming all measurement columns are numeric)
+numeric_columns <- sapply(data, is.numeric)
+
+# Number of bootstrap replications
+reps <- 1000
+
+# Initialize data frame to store the bootstrap results for mean differences
+bootstrap_mean_diffs <- matrix(nrow = reps, ncol = sum(numeric_columns))
+colnames(bootstrap_mean_diffs) <- names(data)[numeric_columns]
+
+# Loop through each numeric measurement column
+for (column_name in names(data)[numeric_columns]) {
+  # Extract measurements for Scanner A and Scanner B using [[ to ensure the result is a vector
+  scanner_A_measurements <- as.numeric(data[seq(1, nrow(data), by = 2), ][[column_name]])
+  scanner_B_measurements <- as.numeric(data[seq(2, nrow(data), by = 2), ][[column_name]])
+  
+  # Perform bootstrap replications
+  for (i in 1:reps) {
+    # Sample slide indices with replacement
+    sampled_indices <- sample(1:length(scanner_A_measurements), size = length(scanner_A_measurements), replace = TRUE)
+    
+    # Compute differences for sampled indices and calculate mean difference
+    sampled_diffs <- scanner_A_measurements[sampled_indices] - scanner_B_measurements[sampled_indices]
+    
+    # Store the mean difference in the corresponding column for this replication
+    bootstrap_mean_diffs[i, column_name] <- mean(sampled_diffs, na.rm = TRUE)
+  }
+}
+
+# Convert the matrix to a data frame
+bootstrap_mean_diffs_df <- as.data.frame(bootstrap_mean_diffs)
+
+# Print the first few rows of the data frame
+head(bootstrap_mean_diffs_df)
+
+```
+
+
+
+```{r}
+
+# Mean Raw Difference Visualization Code
+
+# Gather the data into a long format for faceting
+long_data <- reshape2::melt(bootstrap_mean_diffs_df)
+
+# Create the histogram plot with faceting
+p <- ggplot(long_data, aes(x = value)) +
+  geom_histogram(binwidth = 0.1, fill = "blue", color = "black") +
+  facet_wrap(~ variable, scales = "free", ncol = 3) + # Adjust ncol as needed for layout
+  theme_minimal() +
+  ggtitle("Histograms of Bootstrapped Mean Differences") +
+  xlab("Mean Difference") + ylab("Frequency")
+
+# Print the plot
+print(p)
+
+# Optionally, you can save the plot to a file
+ggsave("bootstrapped_histograms.pdf", p, width = 16, height = 9)
+
+```
+
+
+
+```{r}
+
+# Coefficient of Variation Code
+
+data <- read_excel("C:/Users/shimm/Downloads/CU_v24_2_2_AT2_Philips.xlsx")
+set.seed(234)
+numeric_columns <- sapply(data, is.numeric)
+reps <- 1000
+
+cv_results <- data.frame(column_name = character(), cv_mean = numeric(), stringsAsFactors = FALSE)
+
+for (column_name in names(data)[numeric_columns]) {
+  scanner_A_measurements <- as.numeric(data[seq(1, nrow(data), by = 2), ][[column_name]])
+  scanner_B_measurements <- as.numeric(data[seq(2, nrow(data), by = 2), ][[column_name]])
+  cvs <- numeric(reps)
+  
+  for (i in 1:reps) {
+    sampled_indices <- sample(1:length(scanner_A_measurements), size = length(scanner_A_measurements), replace = TRUE)
+    sampled_A <- scanner_A_measurements[sampled_indices]
+    sampled_B <- scanner_B_measurements[sampled_indices]
+    
+    # Combining both scanner measurements into a single vector for each bootstrap sample
+    combined_measurements <- c(sampled_A, sampled_B)
+    
+    # Calculating CV as the standard deviation divided by the mean of combined scanner measurements
+    # Note: Ensure mean of combined_measurements is not zero to avoid division by zero
+    if (mean(combined_measurements) != 0) {
+      cv_values <- sd(combined_measurements) / mean(combined_measurements)
+      cvs[i] <- cv_values
+    } else {
+      cvs[i] <- NA  # Assign NA if mean is zero to avoid incorrect CV calculation
+    }
+  }
+  
+  cv_results <- rbind(cv_results, data.frame(column_name = column_name, cv_mean = mean(cvs, na.rm = TRUE), stringsAsFactors = FALSE))
+}
+
+print(cv_results)
+
+```
+
+
+
+```{r}
+
+# Coefficient of Variation Visualization Code
+
+library(ggplot2)
+library(reshape2)
+
+# Assuming 'cv_results' is prepared with a similar structure
+cv_long_data <- melt(cv_results, id.vars = "column_name", value.name = "CV")
+
+# Create the histogram plot with faceting for CV
+p_cv <- ggplot(cv_long_data, aes(x = CV)) +
+  geom_histogram(binwidth = 0.05, fill = "green", color = "black") + # Adjust binwidth as necessary
+  facet_wrap(~ column_name, scales = "free", ncol = 3) + # Adjust ncol as needed for layout
+  theme_minimal() +
+  ggtitle("Histograms of Bootstrapped CV Means") +
+  xlab("Coefficient of Variation") + ylab("Frequency")
+
+# Print the plot for CV
+print(p_cv)
+
+  # Save the plot to a file, naming the file after the column
+  file_name <- paste0("CV_histogram_", gsub("[^[:alnum:]]", "_", col_name), ".pdf")  # Sanitize column name for file name
+  ggsave(file_name, plot = p_cv, width = 8, height = 6)
+
+```
+
+
+
+```{r}
+
+# Percent Difference Code
+
+percent_diff_results <- data.frame(column_name = character(), percent_diff_mean = numeric(), stringsAsFactors = FALSE)
+
+for (column_name in names(data)[numeric_columns]) {
+  scanner_A_measurements <- as.numeric(data[seq(1, nrow(data), by = 2), ][[column_name]])
+  scanner_B_measurements <- as.numeric(data[seq(2, nrow(data), by = 2), ][[column_name]])
+  percent_diffs <- numeric(reps)
+  
+  for (i in 1:reps) {
+    sampled_indices <- sample(1:length(scanner_A_measurements), size = length(scanner_A_measurements), replace = TRUE)
+    sampled_A <- scanner_A_measurements[sampled_indices]
+    sampled_B <- scanner_B_measurements[sampled_indices]
+    percent_diff_values <- (abs(sampled_A - sampled_B) / ((sampled_A + sampled_B) / 2)) * 100
+    percent_diffs[i] <- mean(percent_diff_values, na.rm = TRUE)
+  }
+  
+  percent_diff_results <- rbind(percent_diff_results, data.frame(column_name = column_name, percent_diff_mean = mean(percent_diffs, na.rm = TRUE), stringsAsFactors = FALSE))
+}
+
+print(percent_diff_results)
+
+```
+
+
+
+```{r}
+
+# Percent Difference Visualization Code
+
+library(ggplot2)
+library(reshape2)
+
+# Assuming 'percent_diff_results' is already created and contains the desired data
+percent_diff_long_data <- melt(percent_diff_results, id.vars = "column_name", value.name = "PercentDifference")
+
+# Loop through each unique column name and create + save a plot for each
+for (col_name in unique(percent_diff_long_data$column_name)) {
+  # Filter data for the current column
+  filtered_data <- subset(percent_diff_long_data, column_name == col_name)
+  
+  # Create the plot for the current column
+  p_percent_diff <- ggplot(filtered_data, aes(x = PercentDifference)) +
+    geom_histogram(binwidth = 1, fill = "orange", color = "black") +  # Adjust binwidth as needed
+    theme_minimal() +
+    ggtitle(paste("Histogram of Bootstrapped Percent Differences for", col_name)) +
+    xlab("Percent Difference") + ylab("Frequency")
+  
+  # Print the plot (optional, primarily for viewing in an interactive R session)
+  print(p_percent_diff)
+  
+  # Save the plot to a file, naming the file after the column
+  file_name <- paste0("percent_diff_histogram_", gsub("[^[:alnum:]]", "_", col_name), ".pdf")  # Sanitize column name for file name
+  ggsave(file_name, plot = p_percent_diff, width = 8, height = 6)
+}
+
+```
+
+
+
+
+```{r}
+
+# Pearson Correlation Code
+
+library(readxl)
+library(dplyr)
+
+data <- read_excel("input file")
+set.seed(234)
+numeric_columns <- sapply(data, is.numeric)
+reps <- 1000
+
+pearson_results <- data.frame(column_name = character(), 
+                              pearson_correlation = numeric(), 
+                              stringsAsFactors = FALSE)
+
+for (column_name in names(data)[numeric_columns]) {
+  scanner_A_measurements <- as.numeric(data[seq(1, nrow(data), by = 2), ][[column_name]])
+  scanner_B_measurements <- as.numeric(data[seq(2, nrow(data), by = 2), ][[column_name]])
+  pearson_corrs <- numeric(reps)
+  
+  for (i in 1:reps) {
+    sampled_indices <- sample(1:length(scanner_A_measurements), size = length(scanner_A_measurements), replace = TRUE)
+    pearson_corrs[i] <- cor(scanner_A_measurements[sampled_indices], 
+                            scanner_B_measurements[sampled_indices], 
+                            use = "complete.obs", 
+                            method = "pearson")
+  }
+  
+  pearson_results <- rbind(pearson_results, data.frame(column_name = column_name, 
+                                                       pearson_correlation = mean(pearson_corrs, na.rm = TRUE), 
+                                                       stringsAsFactors = FALSE))
+}
+
+print(pearson_results)
+
+```
+
+
+
+```{r}
+
+# Pearson Visualization Code
+
+library(ggplot2)
+library(reshape2)
+
+# Transform 'pearson_results' dataframe to long format for faceting
+long_data_pearson <- melt(pearson_results, id.vars = "column_name", value.name = "PearsonCorrelation")
+
+# Create the histogram plot with faceting for Pearson correlations
+p_pearson <- ggplot(long_data_pearson, aes(x = PearsonCorrelation)) +
+  geom_histogram(binwidth = 0.05, fill = "green", color = "black") +  # Consider adjusting binwidth based on the data range
+  facet_wrap(~ column_name, scales = "free", ncol = 4) +  # Adjust ncol based on total number of columns and plot dimensions
+  theme_minimal() +
+  ggtitle("Histograms of Bootstrapped Pearson Correlations") +
+  xlab("Pearson Correlation") + ylab("Frequency")
+
+# Print the plot for Pearson correlations
+print(p_pearson)
+
+# Save the plot to a file with adjusted dimensions for better visualization
+ggsave("bootstrapped_pearson_histograms.pdf", p_pearson, width = 20, height = 15)  # Adjust size as needed
+
+```
+
+
+
+```{r}
+
+# ICC Code
+
+library(readxl)
+library(psych)
+library(dplyr)
+
+data <- read_excel("input file")
+set.seed(234)
+numeric_columns <- sapply(data, is.numeric)
+reps <- 1000
+
+icc_results <- data.frame(column_name = character(), 
+                          icc = numeric(), 
+                          stringsAsFactors = FALSE)
+
+for (column_name in names(data)[numeric_columns]) {
+  scanner_A_measurements <- as.numeric(data[seq(1, nrow(data), by = 2), ][[column_name]])
+  scanner_B_measurements <- as.numeric(data[seq(2, nrow(data), by = 2), ][[column_name]])
+  icc_values <- numeric(reps)
+  
+  for (i in 1:reps) {
+    sampled_indices <- sample(1:length(scanner_A_measurements), size = length(scanner_A_measurements), replace = TRUE)
+    temp_data <- data.frame(scanner_A = scanner_A_measurements[sampled_indices], 
+                            scanner_B = scanner_B_measurements[sampled_indices])
+    icc_result <- ICC(as.matrix(temp_data))
+    icc_values[i] <- icc_result$ICC
+  }
+  
+  icc_results <- rbind(icc_results, data.frame(column_name = column_name, 
+                                               icc = mean(icc_values, na.rm = TRUE), 
+                                               stringsAsFactors = FALSE))
+}
+
+print(icc_results)
+
+```
+
+
+
+```{r}
+
+# ICC Visualization Code
+
+long_data_icc <- melt(icc_results, id.vars = "column_name", value.name = "ICC")
+
+# Create the histogram plot with faceting for ICC
+p_icc <- ggplot(long_data_icc, aes(x = ICC)) +
+  geom_histogram(binwidth = 0.05, fill = "blue", color = "black") +  # Adjust binwidth as needed
+  facet_wrap(~ column_name, scales = "free", ncol = 3) +  # Adjust ncol for layout
+  theme_minimal() +
+  ggtitle("Histograms of Bootstrapped ICC") +
+  xlab("ICC") + ylab("Frequency")
+
+# Print the plot for ICC
+print(p_icc)
+
+# Optionally, save the plot to a file
+ggsave("bootstrapped_icc_histograms.pdf", p_icc, width = 16, height = 9)
+
+```
+
