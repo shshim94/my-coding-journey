@@ -1,0 +1,80 @@
+---
+title: "final project"
+output: html_document
+---
+
+```{r}
+```
+
+
+```{r setup}
+
+
+Data$smokday2 <- gsub("7", NA, Data$smokday2)
+Data$smokday2 <- gsub("9", NA, Data$smokday2)
+  
+Data2 <- na.omit(Data)
+table(Data2$smokday2)
+
+```
+
+
+```{r munge}
+
+Data3 <- Data2 %>% 
+  mutate(smoking_status = ifelse(smokday2 > 2, 1, 0))
+table(Data3$smoking_status)
+
+mean(Data2$x.incomg)
+sd(Data2$x.incomg)
+```
+
+
+```{r model}
+model1 <- lm(smokday2~ x.incomg+ sex1+ educa+ avedrnk2+ x.imprace+ x.ageg5yr+ x.bmi5cat+ asthma3, Data2)
+summary(model1)
+
+model2 <- lm(smokday2~ x.incomg, Data2)
+summary(model2)
+```
+
+
+```{r plot}
+data(Data2)
+
+theme_set(theme_bw())
+plot1 <- ggplot(Data2, aes(x.incomg, smokday2))
+
+plot1 + geom_count(col="tomato3", show.legend= F) +
+  labs(y= "Number of Smoking Days",
+       x= "Income Level",
+       title= "Income Level to Smoking Days")
+
+table(Data2$x.incomg)
+table(Data2$smokday2)
+```
+
+
+```{r model}
+Data2$dummy1 <- ifelse(Data2$x.incomg== 1,1,0)
+Data2$dummy2 <- ifelse(Data2$x.incomg== 2,1,0)
+Data2$dummy3 <- ifelse(Data2$x.incomg== 3,1,0)
+Data2$dummy4 <- ifelse(Data2$x.incomg== 4,1,0)
+Data2$dummy5 <- ifelse(Data2$x.incomg== 5,1,0)
+
+model3 <- lm(smokday2~ dummy2+ dummy3+ dummy4+ dummy5, data= Data2)
+summary(model3)
+
+model4 <- lm(smokday2~ dummy2+ dummy3+ dummy4+ dummy5+ sex1+ educa+ avedrnk2+ x.ageg5yr+ x.bmi5cat+ asthma3, Data2)
+summary(model4)
+
+summary(model1)$r.squared
+summary(model2)$r.squared
+summary(model3)$r.squared
+summary(model4)$r.squared
+```
+
+
+```{r plot}
+```
+
