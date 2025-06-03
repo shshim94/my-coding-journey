@@ -1,0 +1,3 @@
+Discovering Exoplanets
+Exoplanets are planets orbiting stars outside our solar system.
+Scientists use methods like the transit method to detect them.
